@@ -27,7 +27,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 // Define paths where the NavBar should be hidden
-const EXCLUDED_PATHS = ["/login"];
+const EXCLUDED_PATHS = ["/login", "/"];
 
 // --- NavBar Component (Chakra UI - Sleek Style) ---
 export default function NavBar() {
