@@ -1,36 +1,232 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+```markdown
+# **Department Manager – Frontend (Next.js + TypeScript)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+A modern frontend application built with **Next.js 14 App Router**, **TypeScript**, **Chakra UI (v3)**, **Apollo Client**, and **Lucide Icons**.  
+This application manages organizational departments, supports authentication, and communicates with a GraphQL backend.
+
+---
+
+## 🌐 **Production Deployment**
+
+➡️ **Live URL (Vercel):**  
+**[ADD_PRODUCTION_LINK_HERE]**
+
+---
+
+## 🚀 Features
+
+- 🔐 Secure login (GraphQL authentication)
+- 🏢 Department management:
+  - Create departments
+  - Add optional sub-departments
+  - Update department name (dialog modal)
+  - Delete department (confirmation modal)
+  - View hierarchical department structure
+- 🧠 Apollo Client with token + error handling
+- 🎨 Chakra UI v3 (for styling + dialogs)
+- ✨ Lucide Icons
+- ⚠️ Automatic logout on token expiration
+- 📦 pnpm as the package manager
+
+---
+
+## 🛠 Tech Stack
+
+| Technology         | Purpose |
+|--------------------|---------|
+| **Next.js 14**     | Framework & routing |
+| **TypeScript**     | Type safety |
+| **Chakra UI v3**   | UI components |
+| **Apollo Client**  | GraphQL communication |
+| **Lucide Icons**   | Icons |
+| **pnpm**           | Fast package manager |
+
+---
+
+## 📁 Project Structure
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+src/
+├── app/
+│    ├── login/page.tsx
+│    ├── departments/page.tsx
+│    └── departments/create/page.tsx
+├── components/
+│    ├── UpdateDepartmentDialog.tsx
+│    ├── DeleteConfirmationDialog.tsx
+├── grapghql/
+│    ├── mutations/
+│    ├── queries/
+├── types/
+│    └── graphql.ts
+├── common/
+│    └── LoadingSpinner.tsx
+└── apollo-client.ts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+````
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Setup Instructions
 
-To learn more about Next.js, take a look at the following resources:
+### 1️⃣ Clone the repository
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git clone <YOUR_REPO_URL>
+cd <PROJECT_FOLDER>
+````
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2️⃣ Install dependencies
 
-## Deploy on Vercel
+```bash
+pnpm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 3️⃣ Environment Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a file:
+
+```
+.env.local
+```
+
+Add:
+
+```
+NEXT_PUBLIC_GRAPHQL_URI=http://localhost:3000/graphql
+```
+
+Modify this if your backend uses another port.
+
+---
+
+## ▶️ Running the Project Locally
+
+```bash
+pnpm dev -- -p 3001
+```
+
+Open in browser:
+
+👉 [http://localhost:3001](http://localhost:3001)
+
+---
+
+# 🔐 Authentication Flow
+
+### ✔ Login Page
+
+* Validates username and password
+* Executes login mutation
+* Stores token in `localStorage`
+* Redirects user to `/departments`
+
+### ✔ Auto-Redirect When Token Already Exists
+
+```ts
+useEffect(() => {
+  const token = localStorage.getItem('accessToken');
+  if (token) router.replace('/departments');
+}, []);
+```
+
+---
+
+# ⚠️ Global Session Expiration Handling
+
+The app uses Apollo’s `ErrorLink` to handle expired/invalid tokens:
+
+### When a `401` is detected:
+
+1. Token is removed from localStorage
+2. A Chakra toaster appears
+3. User is redirected to `/login`
+
+Example toast:
+
+```ts
+toaster.create({
+  title: "Session expired",
+  description: "Please log in again.",
+  type: "warning",
+});
+```
+
+---
+
+# 🏢 Department Management
+
+### ✔ Fetch Departments
+
+* Using `GET_DEPARTMENTS` GraphQL query
+* Displays hierarchy
+* Shows update/delete buttons
+
+### ✔ Create Department
+
+Includes:
+
+* Required department name
+* Optional dynamic list of sub-departments
+
+### ✔ Update Department
+
+* Opens `UpdateDepartmentDialog`
+* Only the **name** is editable
+* Updates instantly with refetch
+
+### ✔ Delete Department
+
+* Confirmation modal (`DeleteConfirmationDialog`)
+* UI refreshes on success
+
+---
+
+# 🎨 UI / User Experience
+
+* Fully responsive (mobile → desktop)
+* Clean, simple, intuitive layout
+* Chakra UI dialogs for update/delete actions
+* Loading spinner during GraphQL operations
+* Toasts for feedback
+* Icons via Lucide (`Pencil`, `Plus`, `Trash`)
+
+---
+
+# 🔧 Scripts
+
+| Script                | Description              |
+| --------------------- | ------------------------ |
+| `pnpm dev -- -p 3001` | Start dev server on 3001 |
+| `pnpm build`          | Build for production     |
+| `pnpm start`          | Start production server  |
+| `pnpm lint`           | Lint the code            |
+
+---
+
+## 📦 Deployment (Vercel)
+
+### Steps:
+
+1. Push project to GitHub or GitLab.
+2. Import into **Vercel**.
+3. Add environment variable:
+
+```
+NEXT_PUBLIC_GRAPHQL_URI=<YOUR_PRODUCTION_GRAPHQL_URL>
+```
+
+4. Deploy.
+
+Add your link:
+
+➡️ **[https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)**
+
+
+## 📄 License
+
+MIT License

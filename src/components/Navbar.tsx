@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import NextLink from "next/link";
 import {
@@ -13,6 +13,7 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
+import handleLogout from "@/common/logout";
 
 // --- Configuration for Navigation Links ---
 interface NavItem {
@@ -22,14 +23,11 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Departments", href: "/departments" },
-  { label: "Create", href: "/create" },
-  { label: "Logout", href: "/logout" },
-  { label: "Login", href: "/login" },
-
+  { label: "Add", href: "/departments/create" },
 ];
 
 // Define paths where the NavBar should be hidden
-const EXCLUDED_PATHS = ['/login'];
+const EXCLUDED_PATHS = ["/login"];
 
 // --- NavBar Component (Chakra UI - Sleek Style) ---
 export default function NavBar() {
@@ -42,7 +40,7 @@ export default function NavBar() {
   if (shouldHideNavbar) {
     return null;
   }
-  
+
   const onToggle = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
@@ -65,17 +63,17 @@ export default function NavBar() {
       >
         {/* Logo/Title */}
         <Flex flexShrink={0} align="center">
-          <Text
-            href={"/departments"}
+          <Link
             as={NextLink}
+            href={"/departments"}
             fontSize={{ base: "xl", sm: "2xl" }}
             fontWeight="extrabold"
             color="indigo.600"
             letterSpacing="tight"
-            _hover={{ textDecoration: 'none' }}
+            _hover={{ textDecoration: "none" }}
           >
             Tactology Global
-          </Text>
+          </Link>
         </Flex>
 
         {/* Desktop Navigation Links (Hidden on mobile) */}
@@ -90,7 +88,7 @@ export default function NavBar() {
             variant="ghost"
             p={2}
             minW="auto" // Important to remove default Chakra button minimum width
-            h="auto"     // Important to maintain icon size
+            h="auto" // Important to maintain icon size
             borderRadius="lg"
             color="gray.700"
             _hover={{ bg: "gray.50" }}
@@ -153,6 +151,25 @@ const DesktopNav: React.FC = () => {
           {item.label}
         </Link>
       ))}
+      <Button
+        px={3}
+        py={2}
+        fontSize="sm"
+        fontWeight="semibold"
+        color="white"
+        borderRadius="lg"
+        transition="all 200ms ease-in-out"
+        _hover={{
+          textDecoration: "none",
+          bg: "indigo.50",
+          color: "indigo.700",
+        }}
+        onClick={() => {
+          handleLogout();
+        }}
+      >
+        Logout
+      </Button>
     </Stack>
   );
 };
@@ -163,11 +180,7 @@ const DesktopNav: React.FC = () => {
 const MobileNav: React.FC = () => {
   return (
     // Removed the background and border here, moved to the parent Box for direct control
-    <VStack
-      as="div"
-      px={{ base: 2, sm: 3 }}
-      align="stretch"
-    >
+    <VStack as="div" px={{ base: 2, sm: 3 }} align="stretch">
       {NAV_ITEMS.map((item) => (
         <Link
           key={item.label}
@@ -191,6 +204,25 @@ const MobileNav: React.FC = () => {
           {item.label}
         </Link>
       ))}
+      <Button
+        px={3}
+        py={2}
+        fontSize="sm"
+        fontWeight="semibold"
+        color="white"
+        borderRadius="lg"
+        transition="all 200ms ease-in-out"
+        _hover={{
+          textDecoration: "none",
+          bg: "indigo.50",
+          color: "indigo.700",
+        }}
+        onClick={() => {
+          handleLogout();
+        }}
+      >
+        Logout
+      </Button>
     </VStack>
   );
 };

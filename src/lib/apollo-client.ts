@@ -1,7 +1,6 @@
 import { HttpLink } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { SetContextLink } from "@apollo/client/link/context";
-import { errorLink } from "./apollo-error-link";
 import { ApolloLink } from "@apollo/client";
 
 const httpLink = new HttpLink({
@@ -23,6 +22,6 @@ const authLink = new SetContextLink((prevContext, operation) => {
 });
 
 export const client = new ApolloClient({
-  link: ApolloLink.from([authLink.concat(httpLink), errorLink]),
+  link: ApolloLink.from([authLink.concat(httpLink)]),
   cache: new InMemoryCache(),
 });
