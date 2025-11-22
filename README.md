@@ -1,73 +1,64 @@
-
 ---
 
-```markdown
 # **Department Manager – Frontend (Next.js + TypeScript)**
 
-A modern frontend application built with **Next.js 14 App Router**, **TypeScript**, **Chakra UI (v3)**, **Apollo Client**, and **Lucide Icons**.  
-This application manages organizational departments, supports authentication, and communicates with a GraphQL backend.
+A modern frontend application built with **Next.js 14 App Router**, **TypeScript**, **Chakra UI (v3)**, **Lucide Icons**, and **Apollo Client** to manage department hierarchies, authentication, and CRUD operations.
 
 ---
 
-## 🌐 **Production Deployment**
+## 🚀 **Features**
 
-➡️ **Live URL (Vercel):**  
-**[ADD_PRODUCTION_LINK_HERE]**
+* 🔐 **User Authentication** (Login + Token Storage)
+* 🏢 **Department Management**
 
----
-
-## 🚀 Features
-
-- 🔐 Secure login (GraphQL authentication)
-- 🏢 Department management:
-  - Create departments
-  - Add optional sub-departments
-  - Update department name (dialog modal)
-  - Delete department (confirmation modal)
-  - View hierarchical department structure
-- 🧠 Apollo Client with token + error handling
-- 🎨 Chakra UI v3 (for styling + dialogs)
-- ✨ Lucide Icons
-- ⚠️ Automatic logout on token expiration
-- 📦 pnpm as the package manager
+  * Create Departments
+  * Add Sub-departments
+  * Update Department Names
+  * Delete Departments
+  * Display nested **department hierarchy**
+* 🌐 **GraphQL (Apollo Client)**
+* 🎨 **Chakra UI v3** for styling
+* ✨ **Lucide Icons**
+* ⚠️ Smart error handling with **global Apollo errorLink**
+* 📦 Built with **pnpm**
 
 ---
 
-## 🛠 Tech Stack
+# 🛠️ **Tech Stack**
 
-| Technology         | Purpose |
-|--------------------|---------|
-| **Next.js 14**     | Framework & routing |
-| **TypeScript**     | Type safety |
-| **Chakra UI v3**   | UI components |
-| **Apollo Client**  | GraphQL communication |
-| **Lucide Icons**   | Icons |
-| **pnpm**           | Fast package manager |
+| Technology                     | Purpose                 |
+| ------------------------------ | ----------------------- |
+| **Next.js 14 (App Router)**    | Routing, rendering      |
+| **TypeScript**                 | Safety + type inference |
+| **Apollo Client 3**            | GraphQL operations      |
+| **Chakra UI v3**               | Component system        |
+| **Lucide-react**               | Icons                   |
+| **pnpm**                       | Package manager         |
+| **GraphQL Codegen** (optional) | Type generation         |
 
 ---
 
-## 📁 Project Structure
+# 📁 **Project Structure**
 
 ```
-
 src/
-├── app/
-│    ├── login/page.tsx
-│    ├── departments/page.tsx
-│    └── departments/create/page.tsx
-├── components/
-│    ├── UpdateDepartmentDialog.tsx
-│    ├── DeleteConfirmationDialog.tsx
-├── grapghql/
-│    ├── mutations/
-│    ├── queries/
-├── types/
-│    └── graphql.ts
-├── common/
-│    └── LoadingSpinner.tsx
-└── apollo-client.ts
-
-````
+ ├── app/
+ │    ├── login/page.tsx
+ │    ├── departments/page.tsx
+ │    └── departments/create/page.tsx
+ ├── components/
+ │    ├── UpdateDepartmentDialog.tsx
+ │    ├── DeleteConfirmationDialog.tsx
+ ├── graphql/
+ │    ├── mutations/
+ │    ├── queries/
+ ├── types/
+ │    └── graphql.ts
+ ├── common/
+ │    └── LoadingSpinner.tsx
+ ├── utils/
+ │    └── apollo-client.ts
+```
 
 ---
 
