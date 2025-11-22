@@ -224,7 +224,7 @@ NEXT_PUBLIC_GRAPHQL_URI=<YOUR_PRODUCTION_GRAPHQL_URL>
 
 Add your link:
 
-➡️ **[https://your-vercel-app.vercel.app](https://your-vercel-app.vercel.app)**
+➡️ **[https://department-manager-cyan.vercel.app/](https://department-manager-cyan.vercel.app/)**
 
 
 ## 📄 License
