@@ -127,28 +127,6 @@ useEffect(() => {
 
 ---
 
-# ⚠️ Global Session Expiration Handling
-
-The app uses Apollo’s `ErrorLink` to handle expired/invalid tokens:
-
-### When a `401` is detected:
-
-1. Token is removed from localStorage
-2. A Chakra toaster appears
-3. User is redirected to `/login`
-
-Example toast:
-
-```ts
-toaster.create({
-  title: "Session expired",
-  description: "Please log in again.",
-  type: "warning",
-});
-```
-
----
-
 # 🏢 Department Management
 
 ### ✔ Fetch Departments
@@ -183,7 +161,6 @@ Includes:
 * Clean, simple, intuitive layout
 * Chakra UI dialogs for update/delete actions
 * Loading spinner during GraphQL operations
-* Toasts for feedback
 * Icons via Lucide (`Pencil`, `Plus`, `Trash`)
 
 ---
@@ -213,7 +190,7 @@ NEXT_PUBLIC_GRAPHQL_URI=<YOUR_PRODUCTION_GRAPHQL_URL>
 
 4. Deploy.
 
-Add your link:
+Project Live at:
 
 ➡️ **[https://department-manager-cyan.vercel.app/](https://department-manager-cyan.vercel.app/)**
 
