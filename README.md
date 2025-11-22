@@ -56,7 +56,7 @@ src/
  │    └── graphql.ts
  ├── common/
  │    └── LoadingSpinner.tsx
- ├── utils/
+ ├── lib/
  │    └── apollo-client.ts
 ```
 
